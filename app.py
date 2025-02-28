@@ -11,10 +11,23 @@ import numpy as np
 import math
 
 # Initialize Firebase
-FIREBASE_CREDENTIALS_PATH = "/Users/beihai/personal_repos/the-sack/the-sack-firebase-adminsdk-fbsvc-64e73779b9.json"
+# Load Firebase credentials from Streamlit secrets
+firebase_config = {
+    "type": st.secrets["FIREBASE_CREDENTIALS"]["type"],
+    "project_id": st.secrets["FIREBASE_CREDENTIALS"]["project_id"],
+    "private_key_id": st.secrets["FIREBASE_CREDENTIALS"]["private_key_id"],
+    "private_key": st.secrets["FIREBASE_CREDENTIALS"]["private_key"].replace('\\n', '\n'),
+    "client_email": st.secrets["FIREBASE_CREDENTIALS"]["client_email"],
+    "client_id": st.secrets["FIREBASE_CREDENTIALS"]["client_id"],
+    "auth_uri": st.secrets["FIREBASE_CREDENTIALS"]["auth_uri"],
+    "token_uri": st.secrets["FIREBASE_CREDENTIALS"]["token_uri"],
+    "auth_provider_x509_cert_url": st.secrets["FIREBASE_CREDENTIALS"]["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": st.secrets["FIREBASE_CREDENTIALS"]["client_x509_cert_url"],
+    "universe_domain": st.secrets["FIREBASE_CREDENTIALS"]["universe_domain"]
+}
 
 if not firebase_admin._apps:
-    cred = credentials.Certificate(FIREBASE_CREDENTIALS_PATH)
+    cred = credentials.Certificate(firebase_config)
     firebase_admin.initialize_app(cred, {'storageBucket': 'the-sack.appspot.com'})
 
 db = firestore.client()
