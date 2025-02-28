@@ -1,0 +1,10 @@
+# Ignore Python virtual environment
+venv/
+*.pyc
+__pycache__/
+
+# Ignore credentials and config files
+*.json
+
+# Ignore VS Code settings
+.vscode/
