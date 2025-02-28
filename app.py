@@ -2,7 +2,7 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
 import folium
-from streamlit_folium import folium_static
+from streamlit_folium import st_folium
 from folium.plugins import MarkerCluster
 from geopy.geocoders import Nominatim
 import tempfile
@@ -147,7 +147,7 @@ for story in story_data:
             tooltip=f"{story['title']} - Stage {idx}"
         ).add_to(marker_cluster)
 
-folium_static(m)
+st_folium(m, width=700, height=500)
 
 
 
